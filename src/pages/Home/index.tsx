@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useDebouncedValue } from '../../hooks/useDebouncedValue';
 import { useNumber } from '../../hooks/useNumber';
 import { useToggle } from '../../hooks/useToggle';
 import './index.css';
@@ -7,13 +6,6 @@ import './index.css';
 export const Home = (): JSX.Element => {
   const [count, setCount] = useNumber(20);
   const [isActive, handleToggle] = useToggle(false);
-  const debouncedCount = useDebouncedValue(count);
-
-  useEffect(() => {
-    console.log(debouncedCount);
-  }, [debouncedCount]);
-
-  console.log(isActive);
 
   return (
     <div>
