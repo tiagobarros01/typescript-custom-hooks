@@ -1,27 +1,23 @@
-import { useEffect } from 'react';
-import { useAsyncEffect } from '../../hooks/useAsyncEffect';
+import { useEventListener } from '../../hooks/useEventListener';
 import { useNumber } from '../../hooks/useNumber';
-import { useRecordState } from '../../hooks/useRecordState';
 import { useToggle } from '../../hooks/useToggle';
 import './index.css';
-
-type Payload = {
-  name: string;
-  age?: number;
-  state: string;
-};
 
 export const Home = (): JSX.Element => {
   const [count, setCount] = useNumber(20);
   const [isActive, handleToggle] = useToggle(false);
 
-  useAsyncEffect(async () => {
-    const newPromise = await new Promise((res) => res('New Promise'));
-
-    console.log(newPromise);
-  }, () => {
-    console.log('Desmontado')
-  }, [count]);
+  useEventListener(
+    'keydown',
+    (event) => {
+      if (event.key === 'Enter') {
+        console.log('Enter was pressed');
+      }
+    },
+    {
+      target: window,
+    }
+  );
 
   return (
     <div>
