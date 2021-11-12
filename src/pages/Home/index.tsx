@@ -1,17 +1,12 @@
-import { useEffect } from 'react';
-import { useIsMounted } from '../../hooks/useIsMounted';
 import { useNumber } from '../../hooks/useNumber';
+import { useToggle } from '../../hooks/useToggle';
 import './index.css';
 
 export const Home = (): JSX.Element => {
   const [count, setCount] = useNumber(20);
-  const isMounted = useIsMounted();
+  const [isActive, handleToggle] = useToggle(false);
 
-  useEffect(() => {
-    if (isMounted) {
-      console.log('Rendered component')
-    }
-  }, [isMounted])
+  console.log(isActive);
 
   return (
     <div>
@@ -19,7 +14,15 @@ export const Home = (): JSX.Element => {
 
       <h2>{count}</h2>
 
-      <button type="button" onClick={() => setCount((prevState) => ++prevState)} >Counter</button>
+      <button
+        type="button"
+        onClick={() => {
+          setCount((prevState) => ++prevState);
+          handleToggle();
+        }}
+      >
+        Counter
+      </button>
     </div>
   );
 };
