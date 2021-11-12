@@ -1,10 +1,12 @@
-.container {
+div {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  height: 100vh;
 }
 
-.title {
+h1 {
   color: #fff;
 
   font-weight: bold;
